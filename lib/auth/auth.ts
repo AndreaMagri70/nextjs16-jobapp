@@ -7,7 +7,7 @@ import connectDB from "../db";
 
 // Otteniamo l'istanza di connessione
 const mongooseInstance = await connectDB();
-const client = mongooseInstance.connection.getClient();
+const client = mongooseInstance.connection.getClient() as any;
 
 // Usiamo "as any" sul database per bypassare il conflitto di tipi tra mongoose e better-auth
 const db = client.db() as any; 
