@@ -7,13 +7,13 @@ import connectDB from "../db";
 
 // Otteniamo l'istanza di connessione
 const mongooseInstance = await connectDB();
-const client = mongooseInstance.connection.getClient() as any;
+const client = mongooseInstance.connection.getClient();
 
 // Usiamo "as any" sul database per bypassare il conflitto di tipi tra mongoose e better-auth
-const db = client.db() as any; 
+const db = client.db(); 
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db), // Rimosso il secondo parametro 'client' se non necessario, basta il db
+  database: mongodbAdapter(db as unknown as any), // Rimosso il secondo parametro 'client' se non necessario, basta il db
   session: {
     cookieCache: {
       enabled: true,
